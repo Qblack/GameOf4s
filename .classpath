@@ -4,5 +4,8 @@
 	<classpathentry kind="src" path="res"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="libs/mockito-all-1.9.5.jar"/>
+	<classpathentry kind="lib" path="C:/Eclipse/plugins/net.rim.ejde/vmTools/SignatureTool.jar"/>
+	<classpathentry kind="lib" path="C:/Eclipse/plugins/net.rim.ejde.componentpack7.1.0_7.1.0.10/components/lib/net_rim_api.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

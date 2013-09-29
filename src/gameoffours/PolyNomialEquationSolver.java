@@ -2,6 +2,7 @@ package gameoffours;
 
 import java.util.Stack;
 import java.util.Vector;
+import gameoffours.Polynomial;
 
 
 public class PolyNomialEquationSolver {
@@ -69,14 +70,13 @@ public class PolyNomialEquationSolver {
 		}
 		Vector<String> subEquation = new Vector<String>();
 		
-		while(!equationStack.isEmpty() && equationStack.peek()!=leftBracket){
+		while(!equationStack.isEmpty() && !equationStack.peek().equals(leftBracket)){
 			String node = equationStack.pop();
-			subEquation.add(node);
+			subEquation.add(0,node);
 		}
 		if (equationStack.size()>=1){
 			equationStack.pop();
 		}
-		
 		
 		while(subEquation.size()>1 ){
 
@@ -95,33 +95,42 @@ public class PolyNomialEquationSolver {
 			while(subEquation.contains(SUBTRACTOR)){
 				performOperation(SUBTRACTOR,subEquation);
 			}
+		}	
+		transferVectorToStack(subEquation,equationStack);
+	}
+	
+	private void transferVectorToStack(Vector<String> vector,Stack<String> stack){
+		while(!vector.isEmpty()){
+			String node = vector.remove(0);
+			stack.push(node);
 		}
 	}
 	
-	private Vector<String> performOperation(String operation,Vector<String> equation){
+	private void performOperation(String operation,Vector<String> equation){
 		int operatorPoint = equation.indexOf(operation);
 		String leftValue = equation.get(operatorPoint-1);
 		String rightValue = equation.get(operatorPoint+1);
-		PolyNomial leftNumber = new PolyNomial(leftValue);
-		
-		
+		Polynomial leftNumber = new PolynomialImp(leftValue); 
+						
 		switch(operation){
 			case DIVISOR:
 				leftNumber.DivideBy(rightValue);
+				break;
 			case MULTIPLIER:
 				leftNumber.MultiplyBy(rightValue);
+				break;
 			case PLUS:
 				leftNumber.Add(rightValue);
+				break;
 			case SUBTRACTOR:
-				leftNumber.Add(rightValue);	
-		}
-				
+				leftNumber.Subtract(rightValue);
+				break;
+		}		
 		equation.remove(operatorPoint+1);
 		equation.remove(operatorPoint);
 		equation.remove(operatorPoint-1);
 		
-		equation.add(0, leftNumber.ToString());
-		return equation;
+		equation.add(operatorPoint-1,leftNumber.ToString());
 			
 	}
 	
